@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASS2</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <header>
+        <h1>Assignment 2</h1>
+        <!--logo here-->
+    </header>
+
+    <nav>
+        <!--navigation bar here-->
+    </nav>
+
+    <main id="main-content">
+        <div id="welcome" class="screen">
+            <div id="welcome-container"></div>
+        </div>
+        <div id="entry-form" class="screen" style="display: none;">
+            <div id="container" class="container">
+                
+                <!-- REGISTER FORM -->
+                <div class="form-container register-container">
+                    <form id="register-form">
+                      <h1>Register</h1>
+                      <input type="text" id="reg-username" placeholder="Username" required />
+                      <input type="password" id="reg-password" placeholder="Password" required />
+                      <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required />
+                      <input type="text" id="reg-firstname" placeholder="First Name" required />
+                      <input type="text" id="reg-lastname" placeholder="Last Name" required />
+                      <input type="email" id="reg-email" placeholder="Email" required />
+              
+                      <div class="birthday-selectors">
+                        <select id="birth-day" required>
+                          <option value="">Day</option>
+                          <!-- options 1–31 -->
+                          " + Array.from({ length: 31 }, (_, i) => `<option value="${i+1}">${i+1}</option>`).join('') + "
+                        </select>
+                        <select id="birth-month" required>
+                          <option value="">Month</option>
+                          " + ["January","February","March","April","May","June","July","August","September","October","November","December"].map((m, i) => `<option value="${i+1}">${m}</option>`).join('') + "
+                        </select>
+                        <select id="birth-year" required>
+                          <option value="">Year</option>
+                          " + Array.from({ length: 100 }, (_, i) => `<option value="${2025 - i}">${2025 - i}</option>`).join('') + "
+                        </select>
+                      </div>
+              
+                      <button type="submit">Register</button>
+                      <span>or use your social media</span>
+                      <div class="social-container">
+                        <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
+                        <a href="#" class="social"><i class="lni lni-google"></i></a>
+                        <a href="#" class="social"><i class="lni lni-linkedin-original"></i></a>
+                      </div>
+                    </form>
+                </div>
+
+                <!--LOGIN FORM-->
+                <div class="form-container login-container">
+                    <form action="#">
+                      <h1>Login</h1>
+                      <input type="email" placeholder="Email" />
+                      <input type="password" placeholder="Password" />
+                      <div class="content">
+                        <div class="checkbox">
+                          <input type="checkbox" name="checkbox" id="checkbox" />
+                          <label for="checkbox">Remember me</label>
+                        </div>
+                        <div class="pass-link">
+                          <a href="#">Forgot password?</a>
+                        </div>
+                      </div>
+                      <button>Login</button>
+                      <span>or use your social media</span>
+                      <div class="social-container">
+                        <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
+                        <a href="#" class="social"><i class="lni lni-google"></i></a>
+                        <a href="#" class="social"><i class="lni lni-linkedin-original"></i></a>
+                      </div>
+                    </form>
+                </div>
+
+                <!--OVERLAY: LOGO + INFO-->
+                <div class="overlay-container">
+                    <div class="overlay">
+                      <div class="overlay-panel overlay-left">
+                        <h1 class="title">welcome to our game</h1>
+                        <p></p>
+                        <button class="ghost" id="loginBtn">
+                        </div>
+                      <div class="overlay-panel overlay-right">
+                        <h1 class="title">assignment2</h1>
+                        <p>our names and id</p>
+                        <button class="ghost" id="registerBtn">
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+
+        <div id="login">
+        </div>
+        <div id="configuration">
+        </div>
+        <div id="game">
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+
+    <script src="script.js"></script>
+
+
+
+
+</body>
+</html>
