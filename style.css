@@ -30,6 +30,7 @@
     z-index: 2;
     opacity: 0;
     animation: pop-in 0.5s ease forwards;
+    display: inline-block;
   }
   
   @keyframes pop-in {
@@ -260,19 +261,81 @@
   }
   
   .overlay-left {
-    transform: translateX(-20%);
+    transform: translateX(-50%);
   }
   
   .container.right-panel-active .overlay-left {
-    transform: translateX(0);
+    transform: translateX(-50%);
   }
   
   .overlay-right {
     right: 0;
-    transform: translateX(0);
+    transform: translateX(0%);
   }
   
   .container.right-panel-active .overlay-right {
-    transform: translateX(20%);
+    transform: translateX(30%);
   }
   
+
+  #configuration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: url('images/stars.gif') center/cover no-repeat;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .configuration-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: #fff;
+    text-align: center;
+    animation: fadeInUp 1s ease;
+  }
+
+  .configuration-card h2 {
+    margin-bottom: 20px;
+    font-size: 25px;
+  }
+
+    .configuration-card label {
+        text-align: left;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .configuration-card select {
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        background-color: #fff;
+        color: #333;
+        font-size: 16px;
+    }
+    #start-game{
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 15px;
+        border: none;
+        background: linear-gradient(135deg, #4bb6b7, #328ba8);
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.3s ease;
+        cursor: pointer;
+    }
+    #start-game:hover{
+        background: linear-gradient(135deg, #328ba8, #4bb6b7);
+        transform: scale(1.05);
+    }
+
+    

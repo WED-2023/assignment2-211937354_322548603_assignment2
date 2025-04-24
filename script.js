@@ -44,12 +44,42 @@ function showScreen(screenId) {
 setTimeout(() => {
     showScreen("entry-form");
   }, 4000); 
-  
+
 const registerButton = document.getElementById("registerBtn");
 const loginButton = document.getElementById("loginBtn");
 const container = document.getElementById("container");
 
 registerButton.addEventListener("click", () => {
+    const daySelect = document.getElementById("birth-day");
+const monthSelect = document.getElementById("birth-month");
+const yearSelect = document.getElementById("birth-year");
+
+if (daySelect && monthSelect && yearSelect) {
+  for (let d = 1; d <= 31; d++) {
+    const option = document.createElement("option");
+    option.value = d;
+    option.textContent = d;
+    daySelect.appendChild(option);
+  }
+
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  months.forEach((month, index) => {
+    const option = document.createElement("option");
+    option.value = index + 1;
+    option.textContent = month;
+    monthSelect.appendChild(option);
+  });
+  const currentYear = new Date().getFullYear();
+  for (let y = currentYear; y >= 1980; y--) {
+    const option = document.createElement("option");
+    option.value = y;
+    option.textContent = y;
+    yearSelect.appendChild(option);
+  }
+}
     container.classList.add("right-panel-active");
 });
 

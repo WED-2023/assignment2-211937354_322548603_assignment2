@@ -24,7 +24,7 @@
         </div>
         <div id="entry-form" class="screen" style="display: none;">
             <div id="container" class="container">
-                
+
                 <!-- REGISTER FORM -->
                 <div class="form-container register-container">
                     <form id="register-form">
@@ -39,21 +39,16 @@
                       <div class="birthday-selectors">
                         <select id="birth-day" required>
                           <option value="">Day</option>
-                          <!-- options 1–31 -->
-                          " + Array.from({ length: 31 }, (_, i) => `<option value="${i+1}">${i+1}</option>`).join('') + "
                         </select>
                         <select id="birth-month" required>
                           <option value="">Month</option>
-                          " + ["January","February","March","April","May","June","July","August","September","October","November","December"].map((m, i) => `<option value="${i+1}">${m}</option>`).join('') + "
                         </select>
                         <select id="birth-year" required>
                           <option value="">Year</option>
-                          " + Array.from({ length: 100 }, (_, i) => `<option value="${2025 - i}">${2025 - i}</option>`).join('') + "
                         </select>
                       </div>
               
                       <button type="submit">Register</button>
-                      <span>or use your social media</span>
                       <div class="social-container">
                         <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
                         <a href="#" class="social"><i class="lni lni-google"></i></a>
@@ -78,7 +73,6 @@
                         </div>
                       </div>
                       <button>Login</button>
-                      <span>or use your social media</span>
                       <div class="social-container">
                         <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
                         <a href="#" class="social"><i class="lni lni-google"></i></a>
@@ -92,12 +86,14 @@
                     <div class="overlay">
                       <div class="overlay-panel overlay-left">
                         <h1 class="title">welcome to our game</h1>
+                        <p>Start your journey now</p>
+                        <p>If you don’t have an account yet, join us and start your journey.</p>
                         <p></p>
                         <button class="ghost" id="loginBtn">
                         </div>
                       <div class="overlay-panel overlay-right">
-                        <h1 class="title">assignment2</h1>
-                        <p>our names and id</p>
+                        <h1 class="title">Hello again!</h1>
+                        <p>If you already have an account, just login. We’ve missed you!</p>
                         <button class="ghost" id="registerBtn">
                         </div>
                     </div>
@@ -106,9 +102,19 @@
             </div>
         </div>
 
-        <div id="login">
-        </div>
-        <div id="configuration">
+        <div id="configuration" class="screen">
+            <div class="configuration-card">
+                <h2>Make it personal</h2>
+                <label for="shoot-key">Choose your shoot key:</label>
+                <select id="shoot-key">
+                    <option value="Space">Space</option>
+                    <option value="Enter">Enter</option>
+                    <option value="Shift">Shift</option>
+                    <option value="Ctrl">Ctrl</option>
+                </select>
+
+                <button id="start-game">Start Game</button>
+            </div>
         </div>
         <div id="game">
         </div>
