@@ -1,132 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASS2</title>
-    <link rel="stylesheet" href="style.css">
-
-</head>
-
 <body>
-    <header>
-        <h1>Assignment 2</h1>
-        <!--logo here-->
-    </header>
+  <header>
+    <h1>My Space Game</h1>
+    <img src="logo.png" alt="Logo" />
+  </header>
 
-    <nav>
-        <!--navigation bar here-->
-    </nav>
+  <nav>
+    <!-- You can add navigation buttons here, but game itself must go through login -->
+  </nav>
 
-    <main id="main-content">
-        <div id="welcome" class="screen">
-            <div id="welcome-container"></div>
-        </div>
-        <div id="entry-form" class="screen" style="display: none;">
-            <div id="container" class="container">
+  <main id="main-content">
+    <div id="welcome" class="screen">
+      <!-- Welcome content here -->
+    </div>
 
-                <!-- REGISTER FORM -->
-                <div class="form-container register-container">
-                    <form id="register-form">
-                      <h1>Register</h1>
-                      <input type="text" id="reg-username" placeholder="Username" required />
-                      <input type="password" id="reg-password" placeholder="Password" required />
-                      <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required />
-                      <input type="text" id="reg-firstname" placeholder="First Name" required />
-                      <input type="text" id="reg-lastname" placeholder="Last Name" required />
-                      <input type="email" id="reg-email" placeholder="Email" required />
-              
-                      <div class="birthday-selectors">
-                        <select id="birth-day" required>
-                          <option value="">Day</option>
-                        </select>
-                        <select id="birth-month" required>
-                          <option value="">Month</option>
-                        </select>
-                        <select id="birth-year" required>
-                          <option value="">Year</option>
-                        </select>
-                      </div>
-              
-                      <button type="submit">Register</button>
-                      <div class="social-container">
-                        <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
-                        <a href="#" class="social"><i class="lni lni-google"></i></a>
-                        <a href="#" class="social"><i class="lni lni-linkedin-original"></i></a>
-                      </div>
-                    </form>
-                </div>
+    <div id="register-form" class="screen" style="display:none;">
+      <!-- Register form here -->
+    </div>
 
-                <!--LOGIN FORM-->
-                <div class="form-container login-container">
-                    <form action="#">
-                      <h1>Login</h1>
-                      <input type="email" placeholder="Email" />
-                      <input type="password" placeholder="Password" />
-                      <div class="content">
-                        <div class="checkbox">
-                          <input type="checkbox" name="checkbox" id="checkbox" />
-                          <label for="checkbox">Remember me</label>
-                        </div>
-                        <div class="pass-link">
-                          <a href="#">Forgot password?</a>
-                        </div>
-                      </div>
-                      <button>Login</button>
-                      <div class="social-container">
-                        <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
-                        <a href="#" class="social"><i class="lni lni-google"></i></a>
-                        <a href="#" class="social"><i class="lni lni-linkedin-original"></i></a>
-                      </div>
-                    </form>
-                </div>
+    <div id="login-form" class="screen" style="display:none;">
+      <!-- Login form here -->
+    </div>
 
-                <!--OVERLAY: LOGO + INFO-->
-                <div class="overlay-container">
-                    <div class="overlay">
-                      <div class="overlay-panel overlay-left">
-                        <h1 class="title">welcome to our game</h1>
-                        <p>Start your journey now</p>
-                        <p>If you don’t have an account yet, join us and start your journey.</p>
-                        <p></p>
-                        <button class="ghost" id="loginBtn">
-                        </div>
-                      <div class="overlay-panel overlay-right">
-                        <h1 class="title">Hello again!</h1>
-                        <p>If you already have an account, just login. We’ve missed you!</p>
-                        <button class="ghost" id="registerBtn">
-                        </div>
-                    </div>
-                </div>
-            
-            </div>
-        </div>
+    <div id="config-screen" class="screen" style="display:none;">
+      <!-- Config options (game time, fire key, etc.) -->
+    </div>
 
-        <div id="configuration" class="screen">
-            <div class="configuration-card">
-                <h2>Make it personal</h2>
-                <label for="shoot-key">Choose your shoot key:</label>
-                <select id="shoot-key">
-                    <option value="Space">Space</option>
-                    <option value="Enter">Enter</option>
-                    <option value="Shift">Shift</option>
-                    <option value="Ctrl">Ctrl</option>
-                </select>
+    <div id="game-screen" class="screen" style="display:none;">
+      <canvas id="gameCanvas" width="800" height="600"></canvas>
+    </div>
+  </main>
 
-                <button id="start-game">Start Game</button>
-            </div>
-        </div>
-        <div id="game">
-        </div>
-    </main>
-
-    <footer>
-    </footer>
-
-    <script src="script.js"></script>
-
-
-
-
+  <footer>
+    <p>Made by You | Contact: you@email.com</p>
+  </footer>
 </body>
-</html>
