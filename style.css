@@ -5,3 +5,188 @@
 .screen.active {
   display: block;
 }
+
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: #0d1117;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #1f6feb;
+  padding: 1rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+header img {
+  height: 50px;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  background-color: #161b22;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.screen.active {
+  display: block;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+input, select {
+  background-color: #0d1117;
+  color: #ffffff;
+  border: 1px solid #30363d;
+}
+
+select {
+  appearance: none; /* Remove default OS styles */
+  background-color: #0d1117;
+  color: #ffffff;
+  border: 1px solid #30363d;
+  font-size: 1rem;
+  padding: 0.75rem;
+  width: 100%;
+  border-radius: 5px;
+}
+
+select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='16' height='16' viewBox='0 0 20 20' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7L10 12L15 7' stroke='white' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+}
+
+select option {
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+}
+
+button {
+  background-color: #238636;
+  color: white;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: gray;
+}
+
+footer {
+  background-color: #1f6feb;
+  padding: 1rem;
+  text-align: center;
+}
+
+canvas {
+  border: 2px solid #30363d;
+  background-color: black;
+  width: 100%;
+  max-width: 800px;
+}
+
+a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0%;
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+
+/* Overwrite default button styles for eye icon buttons */
+.toggle-password {
+  position: absolute;
+  top: 58%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.2rem;
+  color: #c9d1d9;
+  cursor: pointer;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Prevent green hover for eye icon */
+.toggle-password:hover {
+  background-color: transparent;
+}
+
+/* Prevent emoji from misaligning */
+.eye-icon {
+  pointer-events: none;
+  line-height: 1;
+}
+
+.logout-btn {
+  background-color: #d73a49;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #e5535b;
+}
+
+
