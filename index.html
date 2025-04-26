@@ -8,15 +8,21 @@
 </head>
 <body>
   <header>
-    <h1>Space Shooter</h1>
-    <img src="logo.png" alt="Game Logo" id="logo">
+    <div class="header-content">
+      <div class="logo-area">
+        <img src="photos/logo.png" alt="Big Logo" id="big-logo">
+      </div>
+    </div>
   </header>
 
   <nav id="navbar">
-    <button onclick="showScreen('welcome')">Home</button>
-    <button onclick="showScreen('login-form')">Login</button>
-    <button onclick="showScreen('register-form')">Register</button>
-    <button onclick="showScreen('about')">About</button>
+    <div class="right-nav">
+      <button onclick="showScreen('welcome')">Home</button>
+      <button onclick="showScreen('login-form')">Login</button>
+      <button onclick="showScreen('register-form')">Register</button>
+      <button onclick="openAbout()">About</button>
+
+    </div>
   </nav>
 
   <main id="main-content">
@@ -29,7 +35,8 @@
       </div>
         
       <div class="welcome-footer">
-        <p>By: Your Name | ID: 123456789</p>
+        <p>By: Liel Parparov | ID: 211937354</p>
+        <p>By: Noa Shvets | ID: 322548603</p>
         <a href="https://yourwebsite.github.io" target="_blank">Visit My Site</a>
       </div>
 
@@ -38,11 +45,14 @@
 
     <!-- Welcome Loged In Screen -->
     <div id="welcome-loged-in" class="screen form-screen">
-      <h2>Welcome to Space Shooter</h2>
-      <p>By: Your Name | ID: 123456789</p>
-      <a href="https://yourwebsite.github.io" target="_blank">Visit My Site</a>
-      <br><br>
-      <button onclick="showScreen('config-screen')">Lets Play!</button>
+      <div class="welcome-header">
+        <button class="pixel-button" onclick="handleGameButton()">Let's Play!</button>
+      </div>
+      <div class="welcome-footer">
+        <p>By: Liel Parparov | ID: 211937354</p>
+        <p>By: Noa Shvets | ID: 322548603</p>
+        <a href="https://yourwebsite.github.io" target="_blank">Visit My Site</a>
+      </div>
     </div>
 
     <!-- Register Form -->
@@ -110,14 +120,21 @@
         <label for="game-duration">Game Duration (minutes):</label>
         <input type="number" id="game-duration" min="2" max="10" required>
       </div>
-      <button onclick="startGame()">Start Game</button>
+      <button class="pixel-button" onclick="startGame()">Start Game</button>
     </div>
 
-    <div id="about" class="screen">
-      <h2>About Space Shooter</h2>
-      <p>This is a Space Shooter game built by Your Name.</p>
-      <p>It features registration, login, dynamic gameplay, and more!</p>
-    </div>
+    <!-- About Screen -->
+    <dialog id="about-modal">
+      <button id="close-about" class="close-button">✖️</button>
+      <div class="about-content">
+        <h2>About Space Shooter</h2>
+        <p>By: Liel Parparov | ID: 211937354</p>
+        <p>By: Noa Shvets | ID: 322548603</p>
+        <p><strong>Templates / Plugins Used:</strong> No external templates or jQuery plugins were used.</p>
+        <p><strong>Hardships:</strong> Aligning the header elements correctly, centering buttons, handling login states, and fixing overlap issues with the logo were the biggest challenges.</p>
+      </div>
+    </dialog>
+    
 
     <!-- Game Screen -->
     <div id="game-screen" class="screen">
@@ -144,6 +161,7 @@
 
 
   <footer>
+    <h1>🛸 Space Shooter 🛸</h1>
     <p>Contact: youremail@example.com</p>
   </footer>
 
