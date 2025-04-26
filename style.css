@@ -1,3 +1,67 @@
+@font-face {
+  font-family: 'MinecraftTen';
+  src: url('fonts/wheaton\ capitals.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+header, #navbar, #welcome h2, #welcome-loged-in h2, #about h2, .welcome-left button, .welcome-footer {
+  font-family: 'MinecraftTen', Arial, sans-serif;
+}
+
+.welcome-left button {
+  font-family: 'MinecraftTen', Arial, sans-serif;
+}
+
+input, select, textarea, form, label, #config-screen {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #1f6feb;
+  padding: 1rem;
+  position: relative;
+  height: 150px; 
+}
+
+.header-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.logo-area {
+  position: absolute;
+  left: 20px;
+  top: 65%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+#big-logo {
+  height: 160px; 
+  pointer-events: none;
+}
+
+header h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.welcome-footer{
+  text-align: center;
+}
+
+
+footer p {
+  font-family:  Arial, sans-serif;
+}
+
 .screen {
   display: none;
 }
@@ -8,13 +72,13 @@
 
 * {
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'MinecraftTen', Arial, sans-serif;
 }
 
 body {
   margin: 0;
-  background-color: #0d1117;
-  color: #ffffff;
+  background-color: #0b0c2a;
+  color: #f0f0f0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -78,7 +142,7 @@ input, select, button {
 }
 
 #config-screen .form-group label {
-  text-align: center; /* 🔥 ADD THIS */
+  text-align: center; 
   margin-bottom: 8px;
   font-size: 1.2rem;
   font-weight: bold;
@@ -120,7 +184,7 @@ input, select {
 }
 
 select {
-  appearance: none; /* Remove default OS styles */
+  appearance: none; 
   background-color: #0d1117;
   color: #ffffff;
   border: 1px solid #30363d;
@@ -144,7 +208,7 @@ select option {
 }
 
 button {
-  background-color: #238636;
+  background-color: #234c86;
   color: white;
   cursor: pointer;
   margin-top: 1rem;
@@ -152,13 +216,12 @@ button {
 }
 
 button:hover {
-  background-color: gray;
-  background-color: #2ea043; /* slightly brighter green */
-  transform: scale(1.05);
+  background-color: #5266a3; 
+  transform: scale(1rgb(66, 86, 145));
 }
 
 button:active {
-  transform: scale(0.95); /* slightly shrink when clicking */
+  transform: scale(0.95); 
 }
 
 footer {
@@ -199,7 +262,7 @@ label {
   padding-right: 2.5rem;
 }
 
-/* Overwrite default button styles for eye icon buttons */
+
 .toggle-password {
   position: absolute;
   top: 58%;
@@ -218,12 +281,12 @@ label {
   align-items: center;
 }
 
-/* Prevent green hover for eye icon */
+
 .toggle-password:hover {
   background-color: transparent;
 }
 
-/* Prevent emoji from misaligning */
+
 .eye-icon {
   pointer-events: none;
   line-height: 1;
@@ -245,42 +308,52 @@ label {
 
 
 #navbar {
-  background: linear-gradient(90deg, #ff5c8d, #ff9966);
-  padding: 10px 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  border-bottom: 3px solid #ffcc70;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #1d2671, #6637c3);
+  border-bottom: 3px solid #f2edf6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-#navbar button, #navbar span {
-  background-color: #ffcc70;
+.left-nav, .right-nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+}
+
+.right-nav {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 15px; 
+}
+
+.left-nav span {
+  font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
+  margin-right: 15px; 
+}
+
+.right-nav button, .left-nav button {
+  background-color: #5f72be;
   border: 2px solid white;
-  color: #000000;
+  color: white;
   font-weight: bold;
   font-size: 1rem;
   padding: 8px 18px;
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  width: auto; /* ✨ FIXED */
 }
 
-#navbar button:hover {
+.right-nav button:hover, .left-nav button:hover {
   background-color: white;
   color: #ff5c8d;
   transform: scale(1.1);
-}
-
-#navbar span {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  color: white;
-  font-weight: bold;
 }
 
 
@@ -292,12 +365,12 @@ canvas {
 }
 
 #gameCanvas {
-  background: #111;
-  border: 3px solid #4CAF50;
+  background: #0a0a0a;
+  border: 3px solid #7df9ff;
+  box-shadow: 0 0 20px #7df9ff;
   margin: 20px auto;
   display: block;
-  box-shadow: 0 0 20px #4CAF50;
-  width: 80vw; /* 80% of viewport width */
+  width: 80vw; 
   height: auto; 
   max-width: 1200px;
   max-height: 800px;
@@ -305,7 +378,7 @@ canvas {
 }
 
 game-screen {
-  display: none; /* make sure it is hidden by default */
+  display: none; 
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -361,7 +434,7 @@ game-screen {
 }
 
 #game-controls button:first-child {
-  min-width: 120px; /* or 130px if you want more space */
+  min-width: 120px; 
 }
 
 #game-controls button {
@@ -369,6 +442,89 @@ game-screen {
 }
 
 #game-controls button:hover {
-  background-color: #2ea043; /* a bit brighter green */
-  transform: scale(1.05); /* make it grow a tiny bit */
+  background-color: #5266a3; 
+  transform: scale(1.05); 
+}
+
+.pixel-button {
+  font-family: 'MinecraftTen', Arial, sans-serif;
+  font-size: 1.2rem;
+  background-color: #1a1f4c;
+  color: #7df9ff;
+  box-shadow: inset 0 0 0 2px #7df9ff, 0 0 8px #7df9ff;
+  outline: 2px solid #7df9ff;
+  padding: 12px 24px;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  border: none; 
+  border-radius: 0; 
+  
+}
+
+.pixel-button:hover {
+  background-color: #7df9ff;
+  color: #1a1f4c;
+  box-shadow: inset 0 0 0 2px #1a1f4c, 0 0 12px #7df9ff, 0 0 20px #7df9ff;
+  outline: 2px solid #1f1f1f;
+  animation: pixel-shake 0.4s infinite;
+}
+
+.pixel-button:active {
+  transform: scale(0.95);
+  background-color: #00cc00;
+  outline: 2px solid #00cc00;
+}
+
+@keyframes pixel-shake {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(1px, -1px); }
+  50% { transform: translate(-1px, 1px); }
+  75% { transform: translate(1px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+#about-modal {
+  padding: 2rem;
+  background: #12163a;
+  border: 3px solid #7df9ff;
+  box-shadow: 0 0 20px #7df9ff;
+  color: white;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 80%;
+  margin: auto;
+  position: relative;
+}
+
+.about-content {
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none; 
+  font-size: 1.8rem; 
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  width: auto; 
+  height: auto; 
+}
+
+.close-button:hover {
+  background: transparent; 
+  transform: scale(1.1);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.7);
 }

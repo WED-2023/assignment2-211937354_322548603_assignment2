@@ -1,4 +1,5 @@
 
+let isFirstSetupDone = false;
 let users = JSON.parse(localStorage.getItem("users")) || [];
 const defaultUser = {
   username: "p",
@@ -24,11 +25,28 @@ function showScreen(id) {
   target.classList.add('active');
 
   if (id === 'game-screen') {
-    target.style.display = 'flex'; // flex for game screen
+    target.style.display = 'flex';
+    if (!gameRunning) {
+      console.log("Restarting game because user returned to Game Screen...");
+      startGame(); // restart game if needed
+    }
   } else {
-    target.style.display = 'block'; // block for normal screens
+    target.style.display = 'block';
+  }
+
+  // 🚀 NEW LOGIC
+  if (gameRunning) {
+    if (id === 'about') {
+      if (!isPaused) {
+        pauseGame();  
+      }
+    } else if (id !== 'game-screen') {
+      stopGame(); 
+    }
   }
 }
+
+
 
 
 
@@ -156,6 +174,7 @@ document.getElementById("form-login").addEventListener("submit", function (e) {
 
 
 function logout() {
+  isFirstSetupDone = false;
   showScreen("welcome");
   renderNavbar(false); // <<✨ THIS LINE
   document.getElementById("game-screen").style.display = "none";
@@ -172,24 +191,36 @@ function renderNavbar(isLoggedIn, username = '') {
 
   if (isLoggedIn) {
     navbar.innerHTML = `
-      <span>👤 ${username}</span>
-      <button onclick="logout()">Logout</button>
-      <button onclick="showScreen('welcome-loged-in')">Home</button>
-      <button onclick="showScreen('game-screen')">Game</button>
-      <button onclick="showScreen('config-screen')">Settings</button>
-      <button onclick="showScreen('about')">About</button>
+      <div class="left-nav">
+        <button onclick="showScreen('welcome-loged-in')">Home</button>
+        <button class="pixel-button" onclick="handleGameButton()">Game</button>
+        <button onclick="showScreen('config-screen')">Settings</button>
+        <button onclick="openAbout()">About</button>
+      </div>
+      <div class="right-nav">
+        <button onclick="logout()">Logout</button>
+        <span>👤 ${username}</span>
+      </div>
     `;
   } else {
     navbar.innerHTML = `
-      <button onclick="showScreen('welcome')">Home</button>
-      <button onclick="showScreen('login-form')">Login</button>
-      <button onclick="showScreen('register-form')">Register</button>
-      <button onclick="showScreen('about')">About</button>
+      <div class="right-nav">
+        <button onclick="showScreen('welcome')">Home</button>
+        <button onclick="showScreen('login-form')">Login</button>
+        <button onclick="showScreen('register-form')">Register</button>
+        <button onclick="openAbout()">About</button>
+      </div>
     `;
   }
 }
 
-
+function handleGameButton() {
+  if (isFirstSetupDone) {
+    showScreen('game-screen');
+  } else {
+    showScreen('config-screen');
+  }
+}
 
 
 let ctx;
@@ -198,11 +229,20 @@ let GAME_HEIGHT;
 let player;
 let gameRunning = false;
 
+const playerImage = new Image();
+playerImage.src = 'photos/player.png';
+
+const enemyImage = new Image();
+enemyImage.src = 'photos/enemy.png';
+
+const backgroundImage = new Image();
+backgroundImage.src = 'photos/space_background.png';
+
 const PLAYER_WIDTH = 40;
-const PLAYER_HEIGHT = 30;
+const PLAYER_HEIGHT = 60;
 const ENEMY_ROWS = 4;
 const ENEMY_COLS = 5;
-const ENEMY_WIDTH = 50;
+const ENEMY_WIDTH = 40;
 const ENEMY_HEIGHT = 40;
 const BULLET_SPEED = 6;
 
@@ -273,14 +313,18 @@ function drawFlare(flare) {
 function draw() {
   ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
+  ctx.drawImage(backgroundImage, 0, 0, GAME_WIDTH, GAME_HEIGHT);
+
   // Draw player
-  drawRect(player);
+  ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
 
   // Draw player bullets
   player.bullets.forEach(bullet => drawRect(bullet, "white"));
 
   // Draw enemies
-  enemies.forEach(enemy => drawRect(enemy, "red"));
+  enemies.forEach(enemy => {
+    ctx.drawImage(enemyImage, enemy.x, enemy.y, enemy.width, enemy.height);
+  });
 
   // Draw enemy bullets
   enemyBullets.forEach(bullet => drawRect(bullet, "orange"));
@@ -606,6 +650,9 @@ function startGame() {
       clearInterval(speedupInterval);
     }
   }, 5000);
+
+  isFirstSetupDone = true;
+
 }
 
 
@@ -656,7 +703,46 @@ function resetGame() {
   }
 }
 
+function stopGame() {
+  gameRunning = false;
+  isPaused = false;
+  document.removeEventListener("keydown", handleKeyDown);
+  console.log("Game stopped.");
+}
 
-// window.addEventListener('resize', () => {
-//   location.reload(); // simple trick: reload page if window resized (optional)
-// });
+
+const aboutModal = document.getElementById('about-modal');
+const closeAboutBtn = document.getElementById('close-about');
+
+// Open About Modal
+function openAbout() {
+  aboutModal.showModal();
+}
+
+// Close About Modal
+function closeAbout() {
+  aboutModal.close();
+}
+
+// Close when clicking X button
+closeAboutBtn.addEventListener('click', closeAbout);
+
+// Close when clicking outside the modal
+aboutModal.addEventListener('click', (e) => {
+  const rect = aboutModal.getBoundingClientRect();
+  if (
+    e.clientX < rect.left ||
+    e.clientX > rect.right ||
+    e.clientY < rect.top ||
+    e.clientY > rect.bottom
+  ) {
+    closeAbout();
+  }
+});
+
+// Close when pressing Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === "Escape" && aboutModal.open) {
+    closeAbout();
+  }
+});
