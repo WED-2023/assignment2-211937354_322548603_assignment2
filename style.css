@@ -46,11 +46,15 @@ main {
 .screen {
   display: none;
   width: 100%;
-  max-width: 500px;
   padding: 2rem;
   background-color: #161b22;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.form-screen {
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .screen.active {
@@ -64,6 +68,49 @@ input, select, button {
   border: none;
   border-radius: 5px;
   font-size: 1rem;
+}
+
+#config-screen .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#config-screen .form-group label {
+  text-align: center; /* 🔥 ADD THIS */
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+}
+
+#config-screen h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: white;
+}
+
+#config-screen {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #161b22;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#config-screen input, 
+#config-screen select,
+#config-screen button {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  max-width: 90%;
 }
 
 input, select {
@@ -101,10 +148,17 @@ button {
   color: white;
   cursor: pointer;
   margin-top: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background-color: gray;
+  background-color: #2ea043; /* slightly brighter green */
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95); /* slightly shrink when clicking */
 }
 
 footer {
@@ -190,3 +244,131 @@ label {
 }
 
 
+#navbar {
+  background: linear-gradient(90deg, #ff5c8d, #ff9966);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 3px solid #ffcc70;
+}
+
+#navbar button, #navbar span {
+  background-color: #ffcc70;
+  border: 2px solid white;
+  color: #000000;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: auto; /* ✨ FIXED */
+}
+
+#navbar button:hover {
+  background-color: white;
+  color: #ff5c8d;
+  transform: scale(1.1);
+}
+
+#navbar span {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
+}
+
+
+
+canvas {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+}
+
+#gameCanvas {
+  background: #111;
+  border: 3px solid #4CAF50;
+  margin: 20px auto;
+  display: block;
+  box-shadow: 0 0 20px #4CAF50;
+  width: 80vw; /* 80% of viewport width */
+  height: auto; 
+  max-width: 1200px;
+  max-height: 800px;
+  
+}
+
+game-screen {
+  display: none; /* make sure it is hidden by default */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+#end-game-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+#end-game-message {
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#end-game-modal button {
+  width: auto;
+  min-width: 150px;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  background-color: #238636;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.canvas-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+#game-controls {
+  display: none;
+}
+
+#game-controls button:first-child {
+  min-width: 120px; /* or 130px if you want more space */
+}
+
+#game-controls button {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#game-controls button:hover {
+  background-color: #2ea043; /* a bit brighter green */
+  transform: scale(1.05); /* make it grow a tiny bit */
+}

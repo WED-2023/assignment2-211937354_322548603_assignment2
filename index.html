@@ -12,28 +12,41 @@
     <img src="logo.png" alt="Game Logo" id="logo">
   </header>
 
-  <nav>
-    <!-- Optional navigation menu -->
+  <nav id="navbar">
+    <button onclick="showScreen('welcome')">Home</button>
+    <button onclick="showScreen('login-form')">Login</button>
+    <button onclick="showScreen('register-form')">Register</button>
+    <button onclick="showScreen('about')">About</button>
   </nav>
 
   <main id="main-content">
 
-    <div id="logout-bar" style="display: none; text-align: right; margin-bottom: 1rem;">
-      <button onclick="logout()" class="logout-btn">Logout</button>
+    <!-- Welcome Screen -->
+    <div id="welcome" class="screen form-screen">
+      <div class="welcome-header">
+        <button onclick="showScreen('register-form')">Register</button>
+        <button onclick="showScreen('login-form')">Login</button>
+      </div>
+        
+      <div class="welcome-footer">
+        <p>By: Your Name | ID: 123456789</p>
+        <a href="https://yourwebsite.github.io" target="_blank">Visit My Site</a>
+      </div>
+
+      
     </div>
 
-    <!-- Welcome Screen -->
-    <div id="welcome" class="screen active">
+    <!-- Welcome Loged In Screen -->
+    <div id="welcome-loged-in" class="screen form-screen">
       <h2>Welcome to Space Shooter</h2>
       <p>By: Your Name | ID: 123456789</p>
       <a href="https://yourwebsite.github.io" target="_blank">Visit My Site</a>
       <br><br>
-      <button onclick="showScreen('register-form')">Register</button>
-      <button onclick="showScreen('login-form')">Login</button>
+      <button onclick="showScreen('config-screen')">Lets Play!</button>
     </div>
 
     <!-- Register Form -->
-    <div id="register-form" class="screen">
+    <div id="register-form" class="screen form-screen">
       <h2>Register</h2>
       <form id="form-register">
         <input type="text" id="reg-username" placeholder="Username" required><br>
@@ -55,9 +68,9 @@
           </button>
         </div>
        
-        <input type="text" placeholder="First Name" required><br>
-        <input type="text" placeholder="Last Name" required><br>
-        <input type="email" placeholder="Email" required><br>
+        <input type="text" id="reg-firstname" placeholder="First Name" required><br>
+        <input type="text" id="reg-lastname" placeholder="Last Name" required><br>
+        <input type="email" id="reg-email" placeholder="Email" required><br>
         <label>Date of Birth:</label><br>
         <select name="day" required></select>
         <select name="month" required></select>
@@ -69,7 +82,7 @@
     </div>
 
     <!-- Login Form -->
-    <div id="login-form" class="screen">
+    <div id="login-form" class="screen form-screen">
       <h2>Login</h2>
       <form id="form-login">
         <input type="text" placeholder="Username" required><br>
@@ -88,18 +101,47 @@
     <!-- Configuration Screen -->
     <div id="config-screen" class="screen">
       <h2>Game Configuration</h2>
-      <label>Fire Key:</label>
-      <input type="text" maxlength="1" placeholder="e.g. Space or A" required><br>
-      <label>Game Duration (minutes):</label>
-      <input type="number" min="2" max="10" required><br>
+      <div class="form-group">
+        <label for="fire-key">Fire Key:</label>
+        <input type="text" id="fire-key" maxlength="1" placeholder="e.g. Space or A" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="game-duration">Game Duration (minutes):</label>
+        <input type="number" id="game-duration" min="2" max="10" required>
+      </div>
       <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <div id="about" class="screen">
+      <h2>About Space Shooter</h2>
+      <p>This is a Space Shooter game built by Your Name.</p>
+      <p>It features registration, login, dynamic gameplay, and more!</p>
     </div>
 
     <!-- Game Screen -->
     <div id="game-screen" class="screen">
-      <canvas id="gameCanvas" width="800" height="600"></canvas>
+      <div class="canvas-wrapper">
+        <canvas id="gameCanvas"></canvas>
+    
+        <div id="game-controls" style="text-align: center; margin-top: 1rem;">
+          <button onclick="pauseGame()">Pause</button>
+          <button onclick="resetGame()">Reset</button>
+        </div>
+      </div>
     </div>
   </main>
+
+  <div id="end-game-modal" style="position: fixed; top: 0; left: 0; 
+  width: 100%; height: 100%; background: rgba(0,0,0,0.8); 
+  flex-direction: column; justify-content: center; align-items: center; 
+  color: white; font-size: 2rem; z-index: 1000; display: none;">
+  <p id="end-game-message"></p>
+  <button onclick="restartGame()" style="margin-top: 20px; padding: 10px 20px; font-size: 1.2rem; background-color: #238636; color: white; border: none; border-radius: 8px; cursor: pointer;">
+    🔄 Play Again
+  </button>
+  </div>
+
 
   <footer>
     <p>Contact: youremail@example.com</p>
