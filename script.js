@@ -28,15 +28,14 @@ function showScreen(id) {
     target.style.display = 'flex';
     if (!gameRunning) {
       console.log("Restarting game because user returned to Game Screen...");
-      startGame(); // restart game if needed
+      startGame(); 
     }
   } else {
     target.style.display = 'block';
   }
 
-  // 🚀 NEW LOGIC
   if (gameRunning) {
-    if (id === 'about') {
+    if (id === 'about-modal'|| id === 'about') {
       if (!isPaused) {
         pauseGame();  
       }
@@ -166,7 +165,7 @@ document.getElementById("form-login").addEventListener("submit", function (e) {
   if (user) {
     alert(`Welcome back, ${user.firstName}!`);
     renderNavbar(true, user.firstName);
-    showScreen("welcome-loged-in"); // 👈 show the logged-in welcome page
+    showScreen("welcome-loged-in"); 
   } else {
     alert("Incorrect username or password.");
   }
@@ -176,7 +175,7 @@ document.getElementById("form-login").addEventListener("submit", function (e) {
 function logout() {
   isFirstSetupDone = false;
   showScreen("welcome");
-  renderNavbar(false); // <<✨ THIS LINE
+  renderNavbar(false); 
   document.getElementById("game-screen").style.display = "none";
   document.getElementById("config-screen").style.display = "none";
   document.getElementById("game-controls").style.display = "none";
@@ -232,11 +231,30 @@ let gameRunning = false;
 const playerImage = new Image();
 playerImage.src = 'photos/player.png';
 
-const enemyImage = new Image();
-enemyImage.src = 'photos/enemy.png';
+const enemyImages = [
+  new Image(),
+  new Image(),
+  new Image(),
+  new Image()
+];
+enemyImages[0].src = 'photos/enemy1.png';
+enemyImages[1].src = 'photos/enemy2.png';
+enemyImages[2].src = 'photos/enemy3.png';
+enemyImages[3].src = 'photos/enemy4.png';
 
-const backgroundImage = new Image();
-backgroundImage.src = 'photos/space_background.png';
+let backgroundImage = new Image();
+
+// Load all background options
+const backgroundOptions = {
+  space_background1: 'photos/space_background1.png',
+  space_background2: 'photos/space_background2.png',
+  space_background3: 'photos/space_background3.png',
+};
+let selectedBackground = 'space_background1'; 
+
+function loadBackground() {
+  backgroundImage.src = backgroundOptions[selectedBackground];
+}
 
 const PLAYER_WIDTH = 40;
 const PLAYER_HEIGHT = 60;
@@ -246,12 +264,19 @@ const ENEMY_WIDTH = 40;
 const ENEMY_HEIGHT = 40;
 const BULLET_SPEED = 6;
 
-let pewSound, explosionSound;
+let pewSound, explosionSound, backgroundMusic, hitSound;
+
 try {
   pewSound = new Audio('sounds/pew.mp3');
   explosionSound = new Audio('sounds/explosion.mp3');
-  pewSound.volume = 0.1;
+  hitSound = new Audio('sounds/player_hit.mp3'); 
+
+  pewSound.volume = 0.05;
   explosionSound.volume = 0.2;
+  hitSound.volume = 0.4; 
+  backgroundMusic = new Audio('sounds/background_music.mp3');
+  backgroundMusic.loop = true;
+  backgroundMusic.volume = 0.3;
 } catch (e) {
   console.warn("Audio files not found.");
 }
@@ -276,7 +301,7 @@ let isPaused = false, flareAnimations = [], victoryTriggered = false;
 let explosions = [], gameEndTime = 0, speedupInterval;
 let remainingTime = 0;
 let lastTimestamp = 0;
-let speedMultiplier = 1;  // start normal speed
+let speedMultiplier = 1;
 
 
 function initEnemies() {
@@ -288,7 +313,8 @@ function initEnemies() {
         y: 50 + row * (ENEMY_HEIGHT + 30),
         width: ENEMY_WIDTH,
         height: ENEMY_HEIGHT,
-        row: row
+        row: row,
+        img: enemyImages[row % enemyImages.length]
       });
     }
   }
@@ -301,7 +327,7 @@ function drawRect(obj, color = obj.color) {
 
 function drawFlare(flare) {
   ctx.save();
-  ctx.globalAlpha = flare.alpha; // Make it semi-transparent
+  ctx.globalAlpha = flare.alpha;
   ctx.fillStyle = "yellow";
   ctx.beginPath();
   ctx.arc(flare.x, flare.y, flare.size, 0, Math.PI * 2);
@@ -315,21 +341,16 @@ function draw() {
 
   ctx.drawImage(backgroundImage, 0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-  // Draw player
   ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
 
-  // Draw player bullets
   player.bullets.forEach(bullet => drawRect(bullet, "white"));
 
-  // Draw enemies
   enemies.forEach(enemy => {
-    ctx.drawImage(enemyImage, enemy.x, enemy.y, enemy.width, enemy.height);
+    ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
   });
 
-  // Draw enemy bullets
   enemyBullets.forEach(bullet => drawRect(bullet, "orange"));
 
-  // Draw flares (shooting animation)
   flareAnimations.forEach(flare => drawFlare(flare));
 
   explosions.forEach(p => {
@@ -339,29 +360,11 @@ function draw() {
     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
     ctx.fill();
   });
-  ctx.globalAlpha = 1; // reset alpha
-
-  // Draw UI
-  
-  // ctx.fillStyle = "white";
-  // ctx.font = "25px Arial";
-  
-  // ctx.fillText("⭐ Score: " + score, 10, 30);
-  // const hearts = "❤️".repeat(player.lives);
-  // ctx.fillText(hearts, 10, 60);
-
-  // // 🕰️ Countdown timer
-  // const secondsLeft = Math.max(0, Math.ceil(remainingTime));
-  // const minutes = Math.floor(secondsLeft / 60);
-  // const seconds = secondsLeft % 60;
-  // const formattedTime = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-
-  // ctx.fillText("🕰️ " + formattedTime, 10, 90);
+  ctx.globalAlpha = 1; 
 
   ctx.fillStyle = "white";
   ctx.font = "25px Arial";
   
-  // 🕰️ Countdown timer
   const secondsLeft = Math.max(0, Math.ceil(remainingTime));
   const minutes = Math.floor(secondsLeft / 60);
   const seconds = secondsLeft % 60;
@@ -369,7 +372,6 @@ function draw() {
   
   const hearts = "❤️".repeat(player.lives);
   
-  // 👉 One line only:
   ctx.fillText(`⭐ ${score}   ${hearts}   🕰️ ${formattedTime}`, 10, 30);
   
 
@@ -379,22 +381,22 @@ function draw() {
   
     ctx.fillStyle = "white";
     ctx.font = "50px Arial";
-    ctx.textAlign = "center"; // center "Game Paused"
+    ctx.textAlign = "center"; 
     ctx.fillText("Game Paused", GAME_WIDTH / 2, GAME_HEIGHT / 2);
   
-    ctx.textAlign = "left"; // ⬅️ Reset after drawing the paused text
+    ctx.textAlign = "left"; 
   }
 }
 
 function update() {
   const now = Date.now();
-  const delta = (now - lastTimestamp) / 1000; // how many seconds passed
+  const delta = (now - lastTimestamp) / 1000; 
 
   remainingTime -= delta;
   lastTimestamp = now;
 
   if (remainingTime <= 0) {
-    showEndGame("\u23F0 Time's up! Your score: " + score);
+    showEndGame("time");
     gameRunning = false;
   }
   player.x += player.dx;
@@ -447,7 +449,7 @@ function update() {
           explosionClone.play().catch(err => console.error("Explosion sound error:", err));
         } 
 
-        // 💥 Create explosion
+        // Create explosion
         for (let p = 0; p < 10; p++) {
           explosions.push({
             x: e.x + e.width / 2,
@@ -464,7 +466,6 @@ function update() {
       }
     }
 
-    // Flare animations (for shooting bullets)
     flareAnimations.forEach(f => {
       f.size -= 0.3; // shrink faster
       f.alpha -= 0.03; // fade out
@@ -502,11 +503,19 @@ function update() {
     const b = enemyBullets[i];
     if (b.x < player.x + player.width && b.x + b.width > player.x && b.y < player.y + player.height && b.y + b.height > player.y) {
       player.lives--;
+    
+      if (gameRunning && hitSound) {
+        const hitClone = hitSound.cloneNode();
+        hitClone.volume = 0.5;
+        hitClone.play().catch(err => console.error("Hit sound error:", err));
+      }
+    
       player.x = Math.random() * (GAME_WIDTH - player.width);
       player.y = GAME_HEIGHT - PLAYER_HEIGHT - 10;
       enemyBullets.splice(i, 1);
+    
       if (player.lives <= 0) {
-        showEndGame("💀 Game Over! Your score: " + score);
+        showEndGame("lives");
       }
     }
   }
@@ -518,15 +527,15 @@ function gameLoop() {
     update();
   }
   
-  draw(); // <-- draw ALWAYS happens, even if paused!
+  draw();
 
   if (enemies.length === 0 && gameRunning) {
-    showEndGame("🎉 Victory! You destroyed all enemy ships! 🎉");
+    showEndGame("victory");
     return;
   }
 
   if (player.lives <= 0 && gameRunning) {
-    showEndGame(`💀 Game Over! Your score: ${score}`);
+    showEndGame("lives");
     return;
   }
 
@@ -573,6 +582,15 @@ if(gameRunning)
 function startGame() {
   gameRunning = true;
   speedMultiplier = 1;
+  if (backgroundMusic) {
+    backgroundMusic.play().catch(err => console.error("Background music error:", err));
+  }
+
+  const selectedRadio = document.querySelector('input[name="background"]:checked');
+  if (selectedRadio) {
+    selectedBackground = selectedRadio.value;
+  }
+  loadBackground();
 
   const canvas = document.getElementById("gameCanvas");
   ctx = canvas.getContext("2d");
@@ -581,7 +599,7 @@ function startGame() {
 
   const headerHeight = document.querySelector('header').offsetHeight;
   const footerHeight = document.querySelector('footer').offsetHeight;
-  const availableHeight = window.innerHeight - headerHeight - footerHeight - 100; // 100px buffer for buttons
+  const availableHeight = window.innerHeight - headerHeight - footerHeight - 100; 
   
   canvas.width = Math.max(Math.min(1200, window.innerWidth * 0.9), 1000);
   canvas.height = Math.min(600, availableHeight);
@@ -611,7 +629,7 @@ function startGame() {
 
   const pauseButton = document.querySelector("#game-controls button:first-child");
   if (pauseButton) {
-    pauseButton.innerText = "Pause"; // Reset the text to "Pause" when starting the game
+    pauseButton.innerText = "Pause"; 
   }
 
   score = 0;
@@ -627,14 +645,14 @@ function startGame() {
   const durationMinutes = parseInt(document.getElementById("game-duration").value) || 2;
   const fireInput = document.getElementById("fire-key").value.trim().toLowerCase();
   if (fireInput === "space") {
-    fireKey = " "; // Set it correctly to space character
+    fireKey = " ";
   } else if (fireInput.length === 1) {
     fireKey = fireInput;
   } else {
-    fireKey = " "; // default if invalid
+    fireKey = " ";
   }
 
-  remainingTime = durationMinutes * 60; // in seconds
+  remainingTime = durationMinutes * 60;
   lastTimestamp = Date.now();
   
   initEnemies();
@@ -645,7 +663,7 @@ function startGame() {
   speedupInterval = setInterval(() => {
     if (speedMultiplier < 4) {
       speedMultiplier += 0.5;
-      if (speedMultiplier > 4) speedMultiplier = 4; // cap at 4.0
+      if (speedMultiplier > 4) speedMultiplier = 4;
     } else {
       clearInterval(speedupInterval);
     }
@@ -659,25 +677,52 @@ function startGame() {
 isPaused = false;
 speedupInterval;
 
-function showEndGame(message) {
+function showEndGame(reason) {
   const modal = document.getElementById("end-game-modal");
   const msg = document.getElementById("end-game-message");
   document.getElementById("game-controls").style.display = "none";
-  msg.innerText = message;
+
+  let finalMessage = "";
+
+  if (reason === "lives") {
+    finalMessage = `💀 You Lost!\nYour score: ${score}`;
+  } else if (reason === "time") {
+    if (score < 100) {
+      finalMessage = `⌛ Time's up!\nYou can do better!\nYour score: ${score}`;
+    } else {
+      finalMessage = `⌛ Time's up!\n🏆 Winner!\nYour score: ${score}`;
+    }
+  } else if (reason === "victory") {
+    finalMessage = `🎯 Champion!\nYour score: ${score}`;
+  } else {
+    finalMessage = `Game Over\nYour score: ${score}`; // fallback
+  }
+ 
+  
+  msg.innerText = finalMessage;
   modal.style.display = "flex";
   gameRunning = false;
   document.removeEventListener("keydown", handleKeyDown);
+
+  if (backgroundMusic) {
+    backgroundMusic.pause();
+  }
+ 
 }
 
 function restartGame() {
   document.getElementById("end-game-modal").style.display = "none";
   startGame();
+  if (backgroundMusic) {
+    backgroundMusic.currentTime = 0;
+    backgroundMusic.play().catch(err => console.error("Background music restart error:", err));
+  }
 }
 
 
 function attachKeyListeners() {
-  document.removeEventListener("keydown", handleKeyDown); // always clean up first
-  document.addEventListener("keydown", handleKeyDown);    // attach fresh
+  document.removeEventListener("keydown", handleKeyDown); 
+  document.addEventListener("keydown", handleKeyDown);    
 }
 
 function pauseGame() {
@@ -688,25 +733,48 @@ function pauseGame() {
   const pauseButton = document.querySelector("#game-controls button:first-child");
   if (isPaused) {
     pauseButton.innerText = "Resume";
+
+    // ➡️ Pause background music
+    if (backgroundMusic) {
+      backgroundMusic.pause();
+    }
+
   } else {
     pauseButton.innerText = "Pause";
-    lastTimestamp = Date.now(); // reset timestamp so timer is correct after resume
+    lastTimestamp = Date.now();
+
+    // ➡️ Resume background music
+    if (backgroundMusic) {
+      backgroundMusic.play().catch(err => console.error("Background music resume error:", err));
+    }
   }
 }
+
 
 
 function resetGame() {
-  if (!gameRunning) return; // Don't reset if game not running
+  if (!gameRunning) return;
 
   if (confirm("Are you sure you want to reset the game?")) {
-    startGame(); // Just call startGame() again to reset everything
+    startGame();
+
+    if (backgroundMusic) {
+      backgroundMusic.currentTime = 0; // ⬅️ Start from beginning
+      backgroundMusic.play().catch(err => console.error("Background music reset error:", err));
+    }
   }
 }
+
 
 function stopGame() {
   gameRunning = false;
   isPaused = false;
   document.removeEventListener("keydown", handleKeyDown);
+  if (backgroundMusic) {
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0;
+  }
+  
   console.log("Game stopped.");
 }
 
@@ -714,14 +782,19 @@ function stopGame() {
 const aboutModal = document.getElementById('about-modal');
 const closeAboutBtn = document.getElementById('close-about');
 
-// Open About Modal
 function openAbout() {
   aboutModal.showModal();
+  if (gameRunning && !isPaused) {
+    pauseGame();
+  }
 }
 
-// Close About Modal
 function closeAbout() {
   aboutModal.close();
+
+  if (gameRunning && isPaused) {
+    pauseGame(); // this will toggle it back to playing
+  }
 }
 
 // Close when clicking X button

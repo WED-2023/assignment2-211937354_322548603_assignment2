@@ -118,8 +118,29 @@
       
       <div class="form-group">
         <label for="game-duration">Game Duration (minutes):</label>
-        <input type="number" id="game-duration" min="2" max="10" required>
+        <input type="number" id="game-duration" min="2" max="10" value="2" required>
       </div>
+      <div class="form-group">
+        <label>Choose Game Background:</label>
+        <div class="background-options">
+          <label class="background-option">
+            <input type="radio" name="background" value="space_background1" checked>
+            <img src="photos/space_background1.png" alt="Background 1">
+          </label>
+      
+          <label class="background-option">
+            <input type="radio" name="background" value="space_background2">
+            <img src="photos/space_background2.png" alt="Background 2">
+          </label>
+      
+          <label class="background-option">
+            <input type="radio" name="background" value="space_background3">
+            <img src="photos/space_background3.png" alt="Background 3">
+          </label>
+        </div>
+      </div>
+      
+      
       <button class="pixel-button" onclick="startGame()">Start Game</button>
     </div>
 
@@ -128,8 +149,8 @@
       <button id="close-about" class="close-button">✖️</button>
       <div class="about-content">
         <h2>About Space Shooter</h2>
-        <p>By: Liel Parparov | ID: 211937354</p>
-        <p>By: Noa Shvets | ID: 322548603</p>
+        <p>By: Liel Parparov | ID: 211937354,</p>
+        <p>       Noa Shvets | ID: 322548603</p>
         <p><strong>Templates / Plugins Used:</strong> No external templates or jQuery plugins were used.</p>
         <p><strong>Hardships:</strong> Aligning the header elements correctly, centering buttons, handling login states, and fixing overlap issues with the logo were the biggest challenges.</p>
       </div>
@@ -162,7 +183,7 @@
 
   <footer>
     <h1>🛸 Space Shooter 🛸</h1>
-    <p>Contact: youremail@example.com</p>
+    <p>Contact us: shvetsn@post.bgu.ac.il | Parparov@post.bgu.ac.il</p>
   </footer>
 
   <script src="script.js"></script>
