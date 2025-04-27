@@ -82,17 +82,12 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow: hidden;
 }
 
 header {
   background-color: #1f6feb;
-  /* padding: 1rem; */
+  padding: 1rem;
   text-align: center;
-  height: 10vh;
-  min-height: 70px;
-  padding: 0 2vw;
-  justify-content: space-between;
 }
 
 header h1 {
@@ -109,22 +104,16 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 2rem; */
-  padding: 0 2vw;
-  overflow: hidden;
-  min-height: 0;
+  padding: 2rem;
 }
 
 .screen {
   display: none;
   width: 100%;
-  height: 100%;
-  padding: 2vh 2vw;
-  /* padding: 2rem; */
+  padding: 2rem;
   background-color: #161b22;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-  overflow: auto;
 }
 
 .form-screen {
@@ -133,11 +122,7 @@ main {
 }
 
 .screen.active {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* display: block; */
+  display: block;
 }
 
 input, select, button {
@@ -146,50 +131,38 @@ input, select, button {
   margin-top: 0.5rem;
   border: none;
   border-radius: 5px;
-  /* font-size: 1rem; */
-  font-size: 1.2vw;
+  font-size: 1rem;
 }
 
 #config-screen .form-group {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 3vh;;
-  /* margin-bottom: 20px; */
+  margin-bottom: 20px;
 }
 
 #config-screen .form-group label {
   text-align: center; 
-  margin-bottom: 1vh;
-  font-size: 1.8vw;
-  /* margin-bottom: 8px;
-  font-size: 1.2rem; */
+  margin-bottom: 8px;
+  font-size: 1.2rem;
   font-weight: bold;
   color: white;
 }
 
 #config-screen h2 {
   text-align: center;
-  margin-bottom: 4vh;
-  font-size: 3vw;
-  /* margin-bottom: 30px;
-  font-size: 2rem; */
+  margin-bottom: 30px;
+  font-size: 2rem;
   color: white;
 }
 
 #config-screen {
-  width: 90%;
-  max-width: 800px;
-  margin: 2vh auto;
-  padding: 4vh 4vw;
-  /* max-width: 600px;
+  max-width: 600px;
   margin: 2rem auto;
-  padding: 2rem; */
+  padding: 2rem;
   background-color: #161b22;
-  border-radius: 2vw;
-  box-shadow: 0 0 2vw rgba(255, 255, 255, 0.1);
-  /* border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); */
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -200,10 +173,8 @@ input, select, button {
 #config-screen button {
   display: block;
   margin: 0 auto;
-  /* width: 300px;
-  max-width: 90%; */
-  width: 70vw;
-  max-width: 500px;
+  width: 300px;
+  max-width: 90%;
 }
 
 input, select {
@@ -217,10 +188,8 @@ select {
   background-color: #0d1117;
   color: #ffffff;
   border: 1px solid #30363d;
-  font-size: 1.5vw;
-  padding: 1vh 1vw;
-  /* font-size: 1rem;
-  padding: 0.75rem; */
+  font-size: 1rem;
+  padding: 0.75rem;
   width: 100%;
   border-radius: 5px;
 }
@@ -228,30 +197,22 @@ select {
 select {
   background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='16' height='16' viewBox='0 0 20 20' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7L10 12L15 7' stroke='white' stroke-width='2'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  /* background-position: right 0.75rem center;
+  background-position: right 0.75rem center;
   background-size: 1em;
-  padding-right: 2.5rem; */
-  background-position: right 2vw center;
-  background-size: 1.5vw;
-  padding-right: 3vw;
+  padding-right: 2.5rem;
 }
 
 select option {
-  font-size: 1.2vw;
-  padding: 1vh 2vw;
-  /* font-size: 0.9rem;
-  padding: 0.25rem 0.5rem; */
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
 }
 
 button {
   background-color: #234c86;
   color: white;
   cursor: pointer;
-  /* margin-top: 1rem; */
-  margin-top: 2vh;
+  margin-top: 1rem;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  font-size: 1.5vw;
-  padding: 1vh 2vw;
 }
 
 button:hover {
@@ -265,25 +226,15 @@ button:active {
 
 footer {
   background-color: #1f6feb;
-  /* padding: 1rem; */
+  padding: 1rem;
   text-align: center;
-  height: 8vh;
-  padding: 0 2vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 canvas {
-  border: 0.3vw solid #30363d;
-  /* border: 2px solid #30363d; */
+  border: 2px solid #30363d;
   background-color: black;
-  /* width: 100%;
-  max-width: 800px; */
-  width: 80vw;
-  max-width: 90vw;
-  height: 50vh;
-  max-height: 60vh;
+  width: 100%;
+  max-width: 800px;
 }
 
 a {
@@ -297,8 +248,7 @@ a:hover {
 
 label {
   display: block;
-  /* margin-top: 1rem; */
-  margin-top: 2vh;
+  margin-top: 1rem;
   margin-bottom: 0%;
 }
 
@@ -309,23 +259,20 @@ label {
 
 .password-wrapper input {
   width: 100%;
-  /* padding-right: 2.5rem; */
-  padding-right: 5vw;
+  padding-right: 2.5rem;
 }
 
 
 .toggle-password {
   position: absolute;
   top: 58%;
-  /* right: 0.75rem; */
-  right: 2vw;
+  right: 0.75rem;
   transform: translateY(-50%);
   background: transparent;
   border: none;
   padding: 0;
   margin: 0;
-  font-size: 2vw;
-  /* font-size: 1.2rem; */
+  font-size: 1.2rem;
   color: #c9d1d9;
   cursor: pointer;
   width: auto;
@@ -349,12 +296,9 @@ label {
   background-color: #d73a49;
   color: white;
   border: none;
-  padding: 1vh 2vw;
-  border-radius: 1vw;
-  font-size: 1.5vw;
-  /* padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 5px;
-  font-size: 1rem; */
+  font-size: 1rem;
   cursor: pointer;
 }
 
@@ -367,20 +311,16 @@ label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 10px 20px; */
-  padding: 2vh 4vw;
+  padding: 10px 20px;
   background: linear-gradient(90deg, #1d2671, #6637c3);
-  border-bottom: 0.3vh solid #f2edf6;
-  box-shadow: 0 0.5vh 2vh rgba(0, 0, 0, 0.5);
-  /* border-bottom: 3px solid #f2edf6;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); */
+  border-bottom: 3px solid #f2edf6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .left-nav, .right-nav {
   display: flex;
   align-items: center;
-  /* gap: 15px; */
-  gap: 2vw;
+  gap: 15px;
 
 }
 
@@ -388,31 +328,24 @@ label {
   display: flex;
   justify-content: center; 
   align-items: center;
-  /* gap: 15px;  */
-  gap: 2vw;
+  gap: 15px; 
 }
 
 .left-nav span {
-  /* font-size: 1.2rem; */
-  font-size: 1.5vw;
+  font-size: 1.2rem;
   color: white;
   font-weight: bold;
-  margin-right: 2vw;
-  /* margin-right: 15px;  */
+  margin-right: 15px; 
 }
 
 .right-nav button, .left-nav button {
   background-color: #5f72be;
-  border: 0.2vw solid white;
-  /* border: 2px solid white; */
+  border: 2px solid white;
   color: white;
   font-weight: bold;
-  font-size: 1.5vw;
-  padding: 1vh 2vw;
-  border-radius: 2vw;
-  /* font-size: 1rem;
+  font-size: 1rem;
   padding: 8px 18px;
-  border-radius: 20px; */
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -426,32 +359,22 @@ label {
 
 
 canvas {
-  /* width: 100%;
+  width: 100%;
   max-width: 1200px;
-  height: auto; */
-  width: 80vw; 
-  max-width: 90vw;
-  height: 50vh; 
-  max-height: 60vh;
+  height: auto;
 }
 
 #gameCanvas {
   background: #0a0a0a;
-  border: 0.3vw solid #7df9ff;
-  box-shadow: 0 0 2vw #7df9ff;
-  margin: 2vh auto;
-  /* border: 3px solid #7df9ff;
+  border: 3px solid #7df9ff;
   box-shadow: 0 0 20px #7df9ff;
-  margin: 20px auto; */
+  margin: 20px auto;
   display: block;
-  width: 80vw;
-  max-width: 90vw;
-  height: 50vh;
-  max-height: 60vh; 
-  /* height: auto; 
+  width: 80vw; 
+  height: auto; 
   max-width: 1200px;
   max-height: 800px;
-   */
+  
 }
 
 game-screen {
@@ -460,7 +383,7 @@ game-screen {
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 #end-game-modal {
@@ -479,28 +402,21 @@ game-screen {
 }
 
 #end-game-message {
-  /* font-size: 2rem; */
-  font-size: 3vw;
+  font-size: 2rem;
   color: white;
   text-align: center;
-  /* margin-bottom: 20px; */
-  margin-bottom: 4vh;
-
+  margin-bottom: 20px;
 }
 
 #end-game-modal button {
   width: auto;
-  min-width: 15vw;
-  padding: 2vh 4vw;
-  font-size: 2vw;
-  /* min-width: 150px;
+  min-width: 150px;
   padding: 12px 24px;
-  font-size: 1.2rem; */
+  font-size: 1.2rem;
   background-color: #238636;
   color: white;
   border: none;
-  /* border-radius: 8px; */
-  border-radius: 2vw;
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -518,9 +434,7 @@ game-screen {
 }
 
 #game-controls button:first-child {
-  /* min-width: 120px;  */
-  min-width: 10vw;
-
+  min-width: 120px; 
 }
 
 #game-controls button {
@@ -534,21 +448,15 @@ game-screen {
 
 .pixel-button {
   font-family: 'MinecraftTen', Arial, sans-serif;
-  /* font-size: 1.2rem; */
-  font-size: 1.5vw;
+  font-size: 1.2rem;
   background-color: #1a1f4c;
   color: #7df9ff;
-  /* box-shadow: inset 0 0 0 2px #7df9ff, 0 0 8px #7df9ff;
+  box-shadow: inset 0 0 0 2px #7df9ff, 0 0 8px #7df9ff;
   outline: 2px solid #7df9ff;
   padding: 12px 24px;
-  margin-top: 1rem; */
-  box-shadow: inset 0 0 0 0.2vw #7df9ff, 0 0 0.8vw #7df9ff;
-  outline: 0.2vw solid #7df9ff;
-  padding: 2vh 4vw;
-  margin-top: 2vh;
+  margin-top: 1rem;
   text-transform: uppercase;
-  /* letter-spacing: 2px; */
-  letter-spacing: 0.3vw;
+  letter-spacing: 2px;
   cursor: pointer;
   transition: all 0.3s ease;
   
@@ -560,45 +468,33 @@ game-screen {
 .pixel-button:hover {
   background-color: #7df9ff;
   color: #1a1f4c;
-  /* box-shadow: inset 0 0 0 2px #1a1f4c, 0 0 12px #7df9ff, 0 0 20px #7df9ff;
-  outline: 2px solid #1f1f1f; */
-  box-shadow: inset 0 0 0 0.2vw #1a1f4c, 0 0 1.2vw #7df9ff, 0 0 2vw #7df9ff;
-  outline: 0.2vw solid #1f1f1f;
+  box-shadow: inset 0 0 0 2px #1a1f4c, 0 0 12px #7df9ff, 0 0 20px #7df9ff;
+  outline: 2px solid #1f1f1f;
   animation: pixel-shake 0.4s infinite;
 }
 
 .pixel-button:active {
   transform: scale(0.95);
   background-color: #00cc00;
-  /* outline: 2px solid #00cc00; */
-  outline: 0.2vw solid #00cc00;
-
+  outline: 2px solid #00cc00;
 }
 
 @keyframes pixel-shake {
   0% { transform: translate(0, 0); }
-  /* 25% { transform: translate(1px, -1px); }
+  25% { transform: translate(1px, -1px); }
   50% { transform: translate(-1px, 1px); }
-  75% { transform: translate(1px, 1px); } */
-  25% { transform: translate(0.3vw, -0.3vh); }
-  50% { transform: translate(-0.3vw, 0.3vh); }
-  75% { transform: translate(0.3vw, 0.3vh); }
+  75% { transform: translate(1px, 1px); }
   100% { transform: translate(0, 0); }
 }
 
 #about-modal {
-  /* padding: 2rem; */
-  padding: 4vh 4vw;
+  padding: 2rem;
   background: #12163a;
-  border: 0.3vw solid #7df9ff;
-  box-shadow: 0 0 2vw #7df9ff;
-  /* border: 3px solid #7df9ff;
-  box-shadow: 0 0 20px #7df9ff; */
+  border: 3px solid #7df9ff;
+  box-shadow: 0 0 20px #7df9ff;
   color: white;
-  border-radius: 2vw;
-  max-width: 80vw;
-  /* border-radius: 10px;
-  max-width: 500px; */
+  border-radius: 10px;
+  max-width: 500px;
   width: 80%;
   margin: auto;
   position: relative;
@@ -610,14 +506,11 @@ game-screen {
 
 .close-button {
   position: absolute;
-  top: 2vh;
-  right: 2vw;
-  /* top: 10px;
-  right: 10px; */
+  top: 10px;
+  right: 10px;
   background: transparent;
   border: none; 
-  /* font-size: 1.8rem;  */
-  font-size: 2.5vw;
+  font-size: 1.8rem; 
   color: white;
   cursor: pointer;
   padding: 0;
@@ -640,10 +533,8 @@ dialog::backdrop {
 .background-options {
   display: flex;
   justify-content: center;
-  /* gap: 30px;
-  margin-top: 10px; */
-  gap: 4vw;
-  margin-top: 2vh;
+  gap: 30px;
+  margin-top: 10px;
 }
 
 .background-option {
@@ -656,21 +547,16 @@ dialog::backdrop {
 }
 
 .background-option img {
-  width: 15vw;
-  height: 15vw;
-  /* width: 120px;
-  height: 120px; */
+  width: 120px;
+  height: 120px;
   object-fit: cover;
-  border-radius: 1.5vw;
-  border: 0.3vw solid transparent;
-  /* border-radius: 12px;
-  border: 3px solid transparent; */
+  border-radius: 12px;
+  border: 3px solid transparent;
   transition: border-color 0.3s, transform 0.3s;
 }
 
 .background-option input[type="radio"] {
-  /* margin-top: 10px; */
-  margin-top: 2vh;
+  margin-top: 10px;
   transform: scale(1.2);
 }
 
@@ -727,8 +613,6 @@ dialog::backdrop {
 
 .score-line {
   text-align: left;
-  /* margin: 8px 0;
-  font-size: 1.5rem; */
-  margin: 1vh 0;
-  font-size: 2vw;
+  margin: 8px 0;
+  font-size: 1.5rem;
 }
