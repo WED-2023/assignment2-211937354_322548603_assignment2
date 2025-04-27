@@ -28,7 +28,7 @@
   <main id="main-content">
 
     <!-- Welcome Screen -->
-    <div id="welcome" class="screen form-screen">
+    <div id="welcome" class="screen form-screen" style="display:none;">
       <div class="welcome-header">
         <button onclick="showScreen('register-form')">Register</button>
         <button onclick="showScreen('login-form')">Login</button>
@@ -44,7 +44,7 @@
     </div>
 
     <!-- Welcome Loged In Screen -->
-    <div id="welcome-loged-in" class="screen form-screen">
+    <div id="welcome-loged-in" class="screen form-screen" style="display:none;">
       <div class="welcome-header">
         <button class="pixel-button" onclick="handleGameButton()">Let's Play!</button>
       </div>
@@ -56,7 +56,7 @@
     </div>
 
     <!-- Register Form -->
-    <div id="register-form" class="screen form-screen">
+    <div id="register-form" class="screen form-screen" style="display:none;">
       <h2>Register</h2>
       <form id="form-register">
         <input type="text" id="reg-username" placeholder="Username" required><br>
@@ -92,7 +92,7 @@
     </div>
 
     <!-- Login Form -->
-    <div id="login-form" class="screen form-screen">
+    <div id="login-form" class="screen form-screen" style="display:none;">
       <h2>Login</h2>
       <form id="form-login">
         <input type="text" placeholder="Username" required><br>
@@ -109,7 +109,7 @@
     </div>
 
     <!-- Configuration Screen -->
-    <div id="config-screen" class="screen">
+    <div id="config-screen" class="screen" style="display:none;">
       <h2>Game Configuration</h2>
       <div class="form-group">
         <label for="fire-key">Fire Key:</label>
@@ -158,7 +158,7 @@
     
 
     <!-- Game Screen -->
-    <div id="game-screen" class="screen">
+    <div id="game-screen" class="screen" style="display:none;">
       <div class="canvas-wrapper">
         <canvas id="gameCanvas"></canvas>
     

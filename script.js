@@ -218,6 +218,12 @@ function renderNavbar(isLoggedIn, username = '') {
 }
 
 function handleGameButton() {
+  if (!currentUsername) {
+    alert("Please login first!");
+    showScreen('login-form');
+    return;
+  }
+  
   if (isFirstSetupDone) {
     showScreen('game-screen');
   } else {
@@ -876,3 +882,20 @@ document.addEventListener('keydown', (e) => {
     closeAbout();
   }
 });
+
+function togglePassword(inputId, toggleButton) {
+  const passwordInput = document.getElementById(inputId);
+  const eyeOpen = toggleButton.querySelector('.eye-open');
+  const eyeClosed = toggleButton.querySelector('.eye-closed');
+
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    eyeOpen.style.display = "none";
+    eyeClosed.style.display = "inline";
+  } else {
+    passwordInput.type = "password";
+    eyeOpen.style.display = "inline";
+    eyeClosed.style.display = "none";
+  }
+}
+
