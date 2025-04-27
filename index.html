@@ -1,132 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASS2</title>
-    <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Shooter Game</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <header>
-        <h1>Assignment 2</h1>
-        <!--logo here-->
-    </header>
+  <header>
+    <div class="header-content">
+      <div class="logo-area">
+        <img src="photos/logo.png" alt="Big Logo" id="big-logo">
+      </div>
+    </div>
+  </header>
 
-    <nav>
-        <!--navigation bar here-->
-    </nav>
+  <nav id="navbar">
+    <div class="right-nav">
+      <button onclick="showScreen('welcome')">Home</button>
+      <button onclick="showScreen('login-form')">Login</button>
+      <button onclick="showScreen('register-form')">Register</button>
+      <button onclick="openAbout()">About</button>
 
-    <main id="main-content">
-        <div id="welcome" class="screen">
-            <div id="welcome-container"></div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- Welcome Screen -->
+    <div id="welcome" class="screen form-screen">
+      <div class="welcome-header">
+        <button onclick="showScreen('register-form')">Register</button>
+        <button onclick="showScreen('login-form')">Login</button>
+      </div>
+        
+      <div class="welcome-footer">
+        <p>By: Liel Parparov | ID: 211937354</p>
+        <p>By: Noa Shvets | ID: 322548603</p>
+        <a href="https://yourwebsite.github.io" target="_blank">Visit My Site</a>
+      </div>
+
+      
+    </div>
+
+    <!-- Welcome Loged In Screen -->
+    <div id="welcome-loged-in" class="screen form-screen">
+      <div class="welcome-header">
+        <button class="pixel-button" onclick="handleGameButton()">Let's Play!</button>
+      </div>
+      <div class="welcome-footer">
+        <p>By: Liel Parparov | ID: 211937354</p>
+        <p>By: Noa Shvets | ID: 322548603</p>
+        <a href="https://yourwebsite.github.io" target="_blank">Visit My Site</a>
+      </div>
+    </div>
+
+    <!-- Register Form -->
+    <div id="register-form" class="screen form-screen">
+      <h2>Register</h2>
+      <form id="form-register">
+        <input type="text" id="reg-username" placeholder="Username" required><br>
+
+        <div class="password-wrapper">
+          <input type="password" id="reg-password" placeholder="Password" required>
+          <button type="button" class="toggle-password" aria-label="Toggle password visibility" onclick="togglePassword('reg-password', this)">
+            <span class="eye-icon eye-open">👁️</span>
+            <span class="eye-icon eye-closed" style="display: none;">🙈</span>
+          </button>
         </div>
-        <div id="entry-form" class="screen" style="display: none;">
-            <div id="container" class="container">
-
-                <!-- REGISTER FORM -->
-                <div class="form-container register-container">
-                    <form id="register-form">
-                      <h1>Register</h1>
-                      <input type="text" id="reg-username" placeholder="Username" required />
-                      <input type="password" id="reg-password" placeholder="Password" required />
-                      <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required />
-                      <input type="text" id="reg-firstname" placeholder="First Name" required />
-                      <input type="text" id="reg-lastname" placeholder="Last Name" required />
-                      <input type="email" id="reg-email" placeholder="Email" required />
-              
-                      <div class="birthday-selectors">
-                        <select id="birth-day" required>
-                          <option value="">Day</option>
-                        </select>
-                        <select id="birth-month" required>
-                          <option value="">Month</option>
-                        </select>
-                        <select id="birth-year" required>
-                          <option value="">Year</option>
-                        </select>
-                      </div>
-              
-                      <button type="submit">Register</button>
-                      <div class="social-container">
-                        <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
-                        <a href="#" class="social"><i class="lni lni-google"></i></a>
-                        <a href="#" class="social"><i class="lni lni-linkedin-original"></i></a>
-                      </div>
-                    </form>
-                </div>
-
-                <!--LOGIN FORM-->
-                <div class="form-container login-container">
-                    <form action="#">
-                      <h1>Login</h1>
-                      <input type="email" placeholder="Email" />
-                      <input type="password" placeholder="Password" />
-                      <div class="content">
-                        <div class="checkbox">
-                          <input type="checkbox" name="checkbox" id="checkbox" />
-                          <label for="checkbox">Remember me</label>
-                        </div>
-                        <div class="pass-link">
-                          <a href="#">Forgot password?</a>
-                        </div>
-                      </div>
-                      <button>Login</button>
-                      <div class="social-container">
-                        <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
-                        <a href="#" class="social"><i class="lni lni-google"></i></a>
-                        <a href="#" class="social"><i class="lni lni-linkedin-original"></i></a>
-                      </div>
-                    </form>
-                </div>
-
-                <!--OVERLAY: LOGO + INFO-->
-                <div class="overlay-container">
-                    <div class="overlay">
-                      <div class="overlay-panel overlay-left">
-                        <h1 class="title">welcome to our game</h1>
-                        <p>Start your journey now</p>
-                        <p>If you don’t have an account yet, join us and start your journey.</p>
-                        <p></p>
-                        <button class="ghost" id="loginBtn">
-                        </div>
-                      <div class="overlay-panel overlay-right">
-                        <h1 class="title">Hello again!</h1>
-                        <p>If you already have an account, just login. We’ve missed you!</p>
-                        <button class="ghost" id="registerBtn">
-                        </div>
-                    </div>
-                </div>
-            
-            </div>
+        
+        <!-- Confirm Password Field -->
+        <div class="password-wrapper">
+          <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required>
+          <button type="button" class="toggle-password" aria-label="Toggle password visibility" onclick="togglePassword('reg-confirm-password', this)">
+            <span class="eye-icon eye-open">👁️</span>
+            <span class="eye-icon eye-closed" style="display: none;">🙈</span>
+          </button>
         </div>
+       
+        <input type="text" id="reg-firstname" placeholder="First Name" required><br>
+        <input type="text" id="reg-lastname" placeholder="Last Name" required><br>
+        <input type="email" id="reg-email" placeholder="Email" required><br>
+        <label>Date of Birth:</label><br>
+        <select name="day" required></select>
+        <select name="month" required></select>
+        <select name="year" required></select>
+        <br><br>
+        <button type="submit">Submit</button>
+      </form>
+      <button onclick="showScreen('welcome')">Back</button>
+    </div>
 
-        <div id="configuration" class="screen">
-            <div class="configuration-card">
-                <h2>Make it personal</h2>
-                <label for="shoot-key">Choose your shoot key:</label>
-                <select id="shoot-key">
-                    <option value="Space">Space</option>
-                    <option value="Enter">Enter</option>
-                    <option value="Shift">Shift</option>
-                    <option value="Ctrl">Ctrl</option>
-                </select>
-
-                <button id="start-game">Start Game</button>
-            </div>
+    <!-- Login Form -->
+    <div id="login-form" class="screen form-screen">
+      <h2>Login</h2>
+      <form id="form-login">
+        <input type="text" placeholder="Username" required><br>
+        <div class="password-wrapper">
+          <input type="password" id="password" placeholder="Password" required>
+          <button type="button" class="toggle-password" aria-label="Toggle password visibility" onclick="togglePassword('password', this)">
+            <span class="eye-icon eye-open">👁️</span>
+            <span class="eye-icon eye-closed" style="display: none;">🙈</span>
+          </button>
         </div>
-        <div id="game">
+        <button type="submit">Login</button>
+      </form>
+      <button onclick="showScreen('welcome')">Back</button>
+    </div>
+
+    <!-- Configuration Screen -->
+    <div id="config-screen" class="screen">
+      <h2>Game Configuration</h2>
+      <div class="form-group">
+        <label for="fire-key">Fire Key:</label>
+        <input type="text" id="fire-key" maxlength="1" placeholder="e.g. Space or A" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="game-duration">Game Duration (minutes):</label>
+        <input type="number" id="game-duration" min="2" max="10" value="2" required>
+      </div>
+      <div class="form-group">
+        <label>Choose Game Background:</label>
+        <div class="background-options">
+          <label class="background-option">
+            <input type="radio" name="background" value="space_background1" checked>
+            <img src="photos/space_background1.png" alt="Background 1">
+          </label>
+      
+          <label class="background-option">
+            <input type="radio" name="background" value="space_background2">
+            <img src="photos/space_background2.png" alt="Background 2">
+          </label>
+      
+          <label class="background-option">
+            <input type="radio" name="background" value="space_background3">
+            <img src="photos/space_background3.png" alt="Background 3">
+          </label>
         </div>
-    </main>
+      </div>
+      
+      
+      <button class="pixel-button" onclick="startGame()">Start Game</button>
+    </div>
 
-    <footer>
-    </footer>
+    <!-- About Screen -->
+    <dialog id="about-modal">
+      <button id="close-about" class="close-button">✖️</button>
+      <div class="about-content">
+        <h2>About Space Shooter</h2>
+        <p>By: Liel Parparov | ID: 211937354,</p>
+        <p>       Noa Shvets | ID: 322548603</p>
+        <p><strong>Templates / Plugins Used:</strong> No external templates or jQuery plugins were used.</p>
+        <p><strong>Hardships:</strong> Aligning the header elements correctly, centering buttons, handling login states, and fixing overlap issues with the logo were the biggest challenges.</p>
+      </div>
+    </dialog>
+    
 
-    <script src="script.js"></script>
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+      <div class="canvas-wrapper">
+        <canvas id="gameCanvas"></canvas>
+    
+        <div id="game-controls" style="text-align: center; margin-top: 1rem;">
+          <button onclick="pauseGame()">Pause</button>
+          <button onclick="resetGame()">Reset</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="end-game-modal" style="position: fixed; top: 0; left: 0; 
+  width: 100%; height: 100%; background: rgba(0,0,0,0.8); 
+  flex-direction: column; justify-content: center; align-items: center; 
+  color: white; font-size: 2rem; z-index: 1000; display: none;">
+  <p id="end-game-message"></p>
+  <button onclick="restartGame()" style="margin-top: 20px; padding: 10px 20px; font-size: 1.2rem; background-color: #2c2a82; color: white; border: none; border-radius: 8px; cursor: pointer;">
+    🔄 Play Again
+  </button>
+  </div>
 
 
+  <footer>
+    <h1>🛸 Space Shooter 🛸</h1>
+    <p>Contact us: shvetsn@post.bgu.ac.il | Parparov@post.bgu.ac.il</p>
+  </footer>
 
-
+  <script src="script.js"></script>
 </body>
 </html>
