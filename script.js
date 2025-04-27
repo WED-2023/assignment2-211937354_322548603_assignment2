@@ -1,5 +1,6 @@
 
 let isFirstSetupDone = false;
+let currentUsername = null; // Track logged-in user
 let users = JSON.parse(localStorage.getItem("users")) || [];
 const defaultUser = {
   username: "p",
@@ -47,15 +48,12 @@ function showScreen(id) {
 }
 
 
-
-
-
-// Populate birth date dropdowns
 window.onload = () => {
   const daySelect = document.querySelector("select[name='day']");
   const monthSelect = document.querySelector("select[name='month']");
   const yearSelect = document.querySelector("select[name='year']");
 
+  // fill selects
   for (let i = 1; i <= 31; i++) {
     const opt = document.createElement('option');
     opt.value = opt.textContent = i;
@@ -78,19 +76,9 @@ window.onload = () => {
     yearSelect.appendChild(opt);
   }
 
+  // 🔥 Force Welcome screen
+  isFirstSetupDone = false; 
   showScreen("welcome"); 
-}
-
-function togglePassword(fieldId, button) {
-  const field = document.getElementById(fieldId);
-  const eyeOpen = button.querySelector(".eye-open");
-  const eyeClosed = button.querySelector(".eye-closed");
-
-  const isHidden = field.type === "password";
-  field.type = isHidden ? "text" : "password";
-
-  eyeOpen.style.display = isHidden ? "none" : "inline";
-  eyeClosed.style.display = isHidden ? "inline" : "none";
 }
 
 // Register form
@@ -165,12 +153,27 @@ document.getElementById("form-login").addEventListener("submit", function (e) {
 
   if (user) {
     alert(`Welcome back, ${user.firstName}!`);
+    currentUsername = username; // 🔥 ADD THIS HERE 🔥
     renderNavbar(true, user.firstName);
     showScreen("welcome-loged-in"); 
   } else {
     alert("Incorrect username or password.");
   }
 });
+
+function getUserScores(username) {
+  const scores = JSON.parse(localStorage.getItem("scores")) || {};
+  return scores[username] || [];
+}
+
+function addUserScore(username, newScore) {
+  const scores = JSON.parse(localStorage.getItem("scores")) || {};
+  if (!scores[username]) {
+    scores[username] = [];
+  }
+  scores[username].push(newScore);
+  localStorage.setItem("scores", JSON.stringify(scores));
+}
 
 
 function logout() {
@@ -692,21 +695,69 @@ function showEndGame(reason) {
   let finalMessage = "";
 
   if (reason === "lives") {
-    finalMessage = `💀 You Lost!\nYour score: ${score}`;
+    finalMessage = `💀 You Lost! \nYour score: ${score}`;
   } else if (reason === "time") {
     if (score < 100) {
-      finalMessage = `⌛ Time's up!\nYou can do better!\nYour score: ${score}`;
+      finalMessage = `⌛ Time's up! \nYou can do better! \nYour score: ${score}`;
     } else {
-      finalMessage = `⌛ Time's up!\n🏆 Winner!\nYour score: ${score}`;
+      finalMessage = `⌛ Time's up! \n🏆 Winner! \nYour score: ${score}`;
     }
   } else if (reason === "victory") {
-    finalMessage = `🎯 Champion!\nYour score: ${score}`;
+    finalMessage = `🎯 Champion! \nYour score: ${score}`;
   } else {
     finalMessage = `Game Over\nYour score: ${score}`; // fallback
   }
  
   
   msg.innerText = finalMessage;
+  if (currentUsername) {
+    addUserScore(currentUsername, score); // Save the current score
+    
+    let scores = getUserScores(currentUsername);
+    scores.sort((a, b) => b - a);
+  
+    scores = scores.slice(0, 10); // Top 10
+  
+    let tableHTML = "\n\n🏆 Your Top Scores:\n";
+  
+    let foundNewScore = false; // 🔥 Track if we already marked the new score
+
+    tableHTML += scores.map((s, i) => {
+      let specialClass = "";
+      let emoji = "";
+    
+      if (i === 0) {
+        specialClass = "gold-score";
+        emoji = "🥇";
+      } else if (i === 1) {
+        specialClass = "silver-score";
+        emoji = "🥈";
+      } else if (i === 2) {
+        specialClass = "bronze-score";
+        emoji = "🥉";
+      }
+    
+      let isNew = false;
+      if (s === score && !foundNewScore) {
+        isNew = true;
+        foundNewScore = true; // ✅ Only first match will be marked
+      }
+    
+      const newMark = isNew ? " ✨ (New)" : "";
+    
+      return `
+        <div class="score-line">
+          ${i + 1}. ${emoji} <span class="${specialClass} ${isNew ? 'new-score' : ''}">${s}${newMark}</span>
+        </div>
+      `;
+    }).join("");
+    
+  
+    msg.innerHTML += "<br><br>" + tableHTML; // 🔥 Notice: use innerHTML, not innerText
+  } else {
+    msg.innerText += `\n\n🏆 Guest Mode: Score not saved`;
+  }
+
   modal.style.display = "flex";
   gameRunning = false;
   document.removeEventListener("keydown", handleKeyDown);

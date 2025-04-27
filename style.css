@@ -580,3 +580,39 @@ dialog::backdrop {
   border-color: #7df9ff;
   transform: scale(1.05);
 }
+
+.new-score {
+  color: #ffd700; /* Golden color */
+  font-weight: bold;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 20px #ffd700;
+  }
+  to {
+    text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00, 0 0 30px #ffea00;
+  }
+}
+
+.gold-score {
+  color: #ffffff; /* Gold */
+  font-weight: bold;
+}
+
+.silver-score {
+  color: #ffffff; /* Silver */
+  font-weight: bold;
+}
+
+.bronze-score {
+  color: #ffffff; /* Bronze */
+  font-weight: bold;
+}
+
+.score-line {
+  text-align: left;
+  margin: 8px 0;
+  font-size: 1.5rem;
+}
